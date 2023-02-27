@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <header>
+        <div class="container my-3 py-3 bg-light">
+            <div class="row">
+                <div class="col-md-6 m-auto text-center">
+                    <h1>受入一覧</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="menu">
+        <div class="container my-3 py-3 bg-light">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary w-100">
+                        受入登録
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="container my-3 py-3 bg-light">
+            <div class="row">
+                <div class="col-md-3">
+                    <form action="{{ url_for('export_inventory') }}" method="get">
+                        <div class="form-group">
+                            <label for="start_date">開始日:</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">終了日:</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">帳簿出力</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+<form action="{{ url_for('delete_range') }}" method="post">
+  <label for="start_id">開始ID:</label>
+  <input type="number" name="start_id" id="start_id" required>
+  <label for="end_id">終了ID:</label>
+  <input type="number" name="end_id" id="end_id" required>
+  <button type="submit" class="btn btn-danger">削除</button>
+</form>
+
+
+    <section id="list">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>在庫一覧</h4>
+                        </div>
+                        <table class="table table-striped text-center">
+                            <tr>
+                                <th>ID</th>
+                                <th>日付</th>
+                                <th>仕入先</th>
+                                <th>種類</th>
+                                <th>商品名</th>
+                                <th>数</th>
+                                <th>容量</th>
+                                <th>単価</th>
+                                <th>合計</th>
+                            </tr>    
+                            {% for row in data %}
+                            <tr>
+                              <td>{{ row[0] }}</td>
+                              <td>{{ row[1] }}</td>
+                              <td>{{ row[2] }}</td>
+                              <td>{{ row[3] }}</td>
+                              <td>{{ row[4] }}</td>
+                              <td>{{ row[5] }}</td>
+                              <td>{{ row[6] }}</td>
+                              <td>{{ row[7] }}</td>
+                              <td>{{ row[8] }}</td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

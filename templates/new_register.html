@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-lg-4 mx-auto">
+                    <div class="card bg-success text-center">
+                        <div class="card-body text-light">
+                            <h3>変更</h3>
+                            <p>変更情報を入力してください。</p>
+                            <form method="POST" action="{{ url_for('new_product') }}">
+                                <div class="mb-3">
+                                    <input type="text" name="store" class="form-control form-control-lg" placeholder="仕入先">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="kind" class="form-control form-control-lg" placeholder="種類">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="product_name" class="form-control form-control-lg" placeholder="商品名">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="quantity" class="form-control form-control-lg" placeholder="容量">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="price" class="form-control form-control-lg" placeholder="単価">
+                                </div>
+                                <input type="submit" value="変更">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

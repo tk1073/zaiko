@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>ユーザー登録</h1>
+<form method="POST" action="signup">
+    <label for="">ユーザー名</label>
+    <input type="text" name="username">
+    <label for="">パスワード</label>
+    <input type="password" name="password">
+    <input type="submit" value="新規登録">
+</form>
+<a href="{{ url_for('login') }}">ログインはこちら</a>
+{% endblock %} 

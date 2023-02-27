@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <header id="page-header">
+        <div class="container my-3 py-3 bg-light">
+            <div class="row">
+                <div class="col-md-6 m-auto text-center">
+                    <h1>商品一覧</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="menu">
+        <div class="container my-3 py-3 bg-light">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary w-100">
+                        新規登録
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <form action="{{ url_for('delete_product') }}" method="post">
+        <label for="start_id">開始ID:</label>
+        <input type="number" name="start_id" id="start_id" required>
+        <label for="end_id">終了ID:</label>
+        <input type="number" name="end_id" id="end_id" required>
+        <button type="submit" class="btn btn-danger">範囲削除</button>
+    </form>
+
+    <h2>商品検索</h2>
+    <form method="POST" action="{{ url_for('search_product') }}">
+      <div class="form-group">
+        <label for="search_keyword">キーワード:</label>
+        <input type="text" class="form-control" id="search_keyword" name="search_keyword">
+      </div>
+      <button type="submit" class="btn btn-primary">検索する</button>
+    </form>
+    {% if results %}
+      <hr>
+      <h2>検索結果</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">仕入先</th>
+                    <th scope="col">商品名</th>
+                    <th scope="col">種類</th>
+                    <th scope="col">容量</th>
+                    <th scope="col">単価</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[1] }}</td>
+                    <td>{{ result[2] }}</td>
+                    <td>{{ result[3] }}</td>
+                    <td>{{ result[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+  {% endif %}
+    <section id="list">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header" >
+                            <h4>在庫一覧</h4>
+                        </div>
+                        <table class="table table-striped text-center">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>仕入先</th>
+                                    <th>種類</th>
+                                    <th>商品名</th>
+                                    <th>容量</th>
+                                    <th>単価</th>
+                                    <th>変更</th>
+                                </tr>    
+
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product[0] }}</td>
+                                <td>{{ product[1] }}</td>
+                                <td>{{ product[2] }}</td>
+                                <td>{{ product[3] }}</td>
+                                <td>{{ product[4] }}</td>
+                                <td>{{ product[5] }}</td>
+                                <td><a href="{{ url_for('new_register') }}" class="btn btn-secondary">
+                                    変更
+                                </a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
